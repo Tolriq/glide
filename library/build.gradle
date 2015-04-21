@@ -1,14 +1,14 @@
 apply plugin: 'com.android.library'
 apply plugin: 'robolectric'
 apply plugin: 'maven'
-apply plugin: 'findbugs'
+//apply plugin: 'findbugs'
 apply plugin: 'pmd'
 apply plugin: 'jacoco'
 apply plugin: 'com.github.kt3k.coveralls'
 
-findbugs {
+/*findbugs {
     toolVersion = "2.0.3"
-}
+}*/
 jacoco {
     toolVersion = "0.7.1.201405082137"
 }
@@ -53,7 +53,7 @@ android {
 }
 
 afterEvaluate {
-    task findbugs(type: FindBugs, dependsOn: assembleDebug) {
+    /*task findbugs(type: FindBugs, dependsOn: assembleDebug) {
 
         description 'Run findbugs'
         group 'verification'
@@ -74,9 +74,9 @@ afterEvaluate {
 
     findbugsTestDebug {
         enabled = false
-    }
+    }*/
 
-    check.dependsOn('findbugs')
+    //check.dependsOn('findbugs')
 
     task pmd(type: Pmd) {
 
