@@ -196,7 +196,7 @@ public class Glide {
     }
 
     // For testing.
-    static void tearDown() {
+    public static void tearDown() {
         glide = null;
     }
 
