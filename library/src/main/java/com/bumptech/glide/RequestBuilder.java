@@ -359,12 +359,11 @@ public class RequestBuilder<TranscodeType> implements Cloneable {
     Request request = buildRequest(target);
 
     Request previous = target.getRequest();
-    if (request.isEquivalentTo(previous)) {
+    if (request.isEquivalentTo(previous) && (Preconditions.checkNotNull(previous).isComplete() || Preconditions.checkNotNull(previous).isRunning())) {
       request.recycle();
       // If the request is completed, beginning again will ensure the result is re-delivered,
-      // triggering RequestListeners and Targets. If the request is failed, beginning again will
-      // restart the request, giving it another chance to complete. If the request is already
-      // running, we can let it continue running without interruption.
+      // triggering RequestListeners and Targets.
+      // If the request is already running, we can let it continue running without interruption.
       if (!Preconditions.checkNotNull(previous).isRunning()) {
         previous.begin();
       }
